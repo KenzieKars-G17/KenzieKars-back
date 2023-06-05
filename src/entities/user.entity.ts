@@ -8,7 +8,11 @@ import {
   DeleteDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToOne,
+  OneToMany,
 } from "typeorm";
+import Address from "./address.entity";
+import Advertisement from "./advertisement.entity";
 
 @Entity("users")
 class User {
@@ -21,10 +25,22 @@ class User {
   @Column({ length: 45, unique: true })
   email: string;
 
-  @Column({ type: "boolean", default: false })
-  admin: boolean;
+  @Column({ length: 11, unique: true })
+  cpf: string;
 
-  @Column({ length: 120 })
+  @Column({ type: "varchar", length: 45 })
+  phone: string;
+
+  @Column({ type: "varchar", length: 45 })
+  birthdate: string;
+
+  @Column({ type: "varchar", length: 45, nullable: true })
+  description: string | null;
+
+  @Column({ type: "boolean", default: false })
+  seller: boolean;
+
+  @Column({ type: "varchar", length: 120 })
   password: string;
 
   @CreateDateColumn({ type: "date" })
@@ -35,6 +51,12 @@ class User {
 
   @DeleteDateColumn({ type: "date" })
   deletedAt: string;
+
+  @OneToOne(() => Address, (address) => address.user)
+  address: Address;
+
+  @OneToMany(() => Advertisement, (advertisement) => advertisement.user)
+  advertisements: Advertisement[];
 
   @BeforeInsert()
   @BeforeUpdate()

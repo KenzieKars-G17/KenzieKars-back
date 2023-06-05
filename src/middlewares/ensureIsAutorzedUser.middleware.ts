@@ -7,7 +7,7 @@ const ensureIsAutorzedUser = async (
   resp: Response,
   next: NextFunction
 ): Promise<void> => {
-  if (Number(req.params.id) === req.user.sub || req.user.admin) {
+  if (Number(req.params.id) === req.user.sub || req.user.seller) {
     return next();
   } else {
     throw new AppError("Insufficient permission", 403);
