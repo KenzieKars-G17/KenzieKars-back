@@ -1,23 +1,31 @@
-// import { Repository } from "typeorm";
-// import { AppDataSource } from "../../data-source";
-// import { RealEstate } from "../../entities";
-// import { listAllRealEstateNoCategoryType } from "../../interfaces/realEstate.interfaces";
-// import { returnRealEstateNoCategory } from "../../schemas/realEstate.schemas";
+import { AppDataSource } from "../../data-source";
+import { Advertisement, User } from "../../entities";
+import { AppError } from "../../errors";
 
-// const listAllRealEstateService =
-//   async (): Promise<listAllRealEstateNoCategoryType> => {
-//     const realEstateRepository: Repository<RealEstate> =
-//       AppDataSource.getRepository(RealEstate);
-//     const findRealStates: Array<RealEstate> = await realEstateRepository.find({
-//       relations: {
-//         address: true,
-//       },
-//     });
+import { TAdvertisementArray } from "../../interfaces/advertisement.interface";
+import { advertisementAllSchema } from "../../schemas/advertisement.schema";
 
-//     const realEstateReturn: listAllRealEstateNoCategoryType =
-//       returnRealEstateNoCategory.parse(findRealStates);
+const listAdvertisementByIdService = async (
+  userId: number
+): Promise<TAdvertisementArray> => {
+  const advertisementRepository = AppDataSource.getRepository(Advertisement);
+  const usersRepository = AppDataSource.getRepository(User);
 
-//     return realEstateReturn;
-//   };
+  const user: User | null = await usersRepository.findOneBy({
+    id: userId,
+  });
 
-// export { listAllRealEstateService };
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+
+  const advertisements: Advertisement[] = await advertisementRepository.find({
+    where: {
+      user: user.advertisements,
+    },
+  });
+
+  return advertisementAllSchema.parse(advertisements);
+};
+
+export { listAdvertisementByIdService };

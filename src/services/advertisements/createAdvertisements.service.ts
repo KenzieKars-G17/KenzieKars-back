@@ -23,7 +23,7 @@ const createAdvertisementService = async (
 
   const advertisement: Advertisement | null = advertisementRepository.create({
     ...data,
-    user: user!,
+    user: user,
   });
  
 
