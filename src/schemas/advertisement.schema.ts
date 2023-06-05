@@ -30,6 +30,7 @@ const advertisementResponseSchema = z
 
 const advertisementReqSchema = advertisementSchema.omit({ id: true });
 
+
 const advertisementAll = advertisementResponseSchema
   .extend({ user: returnUserAdSchema })
   .partial()
