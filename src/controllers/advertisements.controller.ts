@@ -31,12 +31,12 @@ const updateAdvertisementController = async (req: Request, res: Response) => {
 
   const updateData: TAdvertisementUpdateRequest = req.body;
 
-  const updateContact = await updateAdvertisementService(
+  const updateAdvertisement = await updateAdvertisementService(
     updateData,
     advertisementId
   );
 
-  return res.json(updateContact);
+  return res.json(updateAdvertisement);
 };
 
 const deleteAdvertisementController = async (req: Request, res: Response) => {
