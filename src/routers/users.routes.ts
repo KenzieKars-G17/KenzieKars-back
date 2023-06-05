@@ -7,11 +7,12 @@ import {
 } from "../controllers/users.controllers";
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
 import ensureUserEmailExist from "../middlewares/ensureEmailExist.middleware";
-import ensureUserIdExist from "../middlewares/ensureUserExists.middleware"
+import ensureUserIdExist from "../middlewares/ensureUserExists.middleware";
 import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
 import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsvalid.middleware";
-import ensureUserIsAdmin from "../middlewares/ensureIsAdmin.middleware";
+import ensureUserIsAdmin from "../middlewares/ensureIsSeller.middleware";
 import ensureIsAutorzedUser from "../middlewares/ensureIsAutorzedUser.middleware";
+import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 
 const usersRoutes: Router = Router();
 
@@ -25,7 +26,7 @@ usersRoutes.post(
 usersRoutes.get(
   "",
   ensureTokenIsValidMiddleware,
-  ensureUserIsAdmin,
+  ensureUserIsSeller,
   listAllUsersController
 );
 
