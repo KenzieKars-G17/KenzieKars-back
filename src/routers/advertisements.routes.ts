@@ -2,7 +2,7 @@ import { Router } from "express";
 import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsvalid.middleware";
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
 import { advertisementReqSchema, updateAdvertisementSchema } from "../schemas/advertisement.schema";
-import { createAdvertisementController, deleteAdvertisementController, listAdvertisementsByIdController, updateAdvertisementController } from "../controllers/advertisements.controller";
+import { createAdvertisementController, deleteAdvertisementController, listAdvertisementsByIdController, updateAdvertisementController } from "../controllers/advertisements.controllers";
 import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 
 const advertisementRoutes = Router();
