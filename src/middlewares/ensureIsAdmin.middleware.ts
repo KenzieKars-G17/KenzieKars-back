@@ -7,7 +7,7 @@ const ensureUserIsAdmin = async (
   resp: Response,
   next: NextFunction
 ): Promise<void> => {
-  if (!req.user.admin) {
+  if (!req.user.seller) {
     throw new AppError("Insufficient permission", 403);
   }
 

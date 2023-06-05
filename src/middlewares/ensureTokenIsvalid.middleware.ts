@@ -23,7 +23,7 @@ const ensureTokenIsValidMiddleware = (
     }
 
     req.user = {
-      admin: decoded.admin,
+      seller: decoded.seller,
       sub: Number(decoded.sub),
     };
 
