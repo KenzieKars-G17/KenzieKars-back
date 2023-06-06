@@ -20,9 +20,15 @@ const listAdvertisementByIdService = async (
   }
 
   const advertisements: Advertisement[] = await advertisementRepository.find({
-    where: {
-      user: user.advertisements,
-    },
+     where: {
+      user: {
+        id: user.id
+      },
+     }
+    ,
+    relations:{
+      user:true
+    }
   });
 
   return advertisementAllSchema.parse(advertisements);
