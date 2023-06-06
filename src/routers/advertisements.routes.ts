@@ -1,9 +1,8 @@
 import { Router } from "express";
 import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsvalid.middleware";
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
-import { advertisementReqSchema } from "../schemas/advertisement.schema";
-import { createAdvertisementController } from "../controllers/advertisements.controller";
-import ensureUserIdExist from "../middlewares/ensureUserExists.middleware";
+import { advertisementReqSchema, updateAdvertisementSchema } from "../schemas/advertisement.schema";
+import { createAdvertisementController, deleteAdvertisementController, listAdvertisementsByIdController, updateAdvertisementController } from "../controllers/advertisements.controllers";
 import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 
 const advertisementRoutes = Router();
@@ -15,5 +14,11 @@ advertisementRoutes.post(
   ensureDataIsValidMiddleware(advertisementReqSchema),
   createAdvertisementController
 );
+
+advertisementRoutes.get('', ensureTokenIsValidMiddleware,ensureUserIsSeller,listAdvertisementsByIdController)
+
+advertisementRoutes.patch('/:id',ensureTokenIsValidMiddleware, ensureUserIsSeller,ensureDataIsValidMiddleware(updateAdvertisementSchema), updateAdvertisementController)
+
+advertisementRoutes.delete('/:id',ensureTokenIsValidMiddleware,ensureUserIsSeller,deleteAdvertisementController)
 
 export default advertisementRoutes;
