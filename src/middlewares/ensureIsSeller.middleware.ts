@@ -8,7 +8,6 @@ const ensureUserIsSeller = async (
   next: NextFunction
 ): Promise<void> => {
   if (!req.user.seller) {
-    console.log(req.user);
     
     throw new AppError("Insufficient permission", 403);
   }

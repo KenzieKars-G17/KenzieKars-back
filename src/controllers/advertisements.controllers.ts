@@ -19,7 +19,7 @@ const listAdvertisementsByIdController = async (
   req: Request,
   res: Response
 ) => {
-  const userId: number = res.locals.sub;
+  const userId: number = req.user.sub;
 
   const Advertisements = await listAdvertisementByIdService(userId);
 
