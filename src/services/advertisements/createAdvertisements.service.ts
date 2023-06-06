@@ -6,7 +6,6 @@ import {
 } from "../../interfaces/advertisement.interface";
 import { AppError } from "../../errors";
 import {
-  advertisementResponseSchema,
   advertisementSchema,
 } from "../../schemas/advertisement.schema";
 
