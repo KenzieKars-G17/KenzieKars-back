@@ -38,6 +38,9 @@ class Advertisement {
   @Column({ type: "varchar", length: 250 })
   cover_image: string;
 
+  @Column({ type: "boolean", default: true })
+  is_active: boolean;
+
   @OneToMany(() => Image, (image) => image.advertisement)
   images: Image[];
 
