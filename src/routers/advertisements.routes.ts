@@ -12,6 +12,7 @@ import {
   updateAdvertisementController,
   listAllAdvertisementsController,
   updateAdvertisementStatusController,
+  listAdvertisementByIdController,
 } from "../controllers/advertisements.controllers";
 import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 
@@ -32,6 +33,10 @@ advertisementRoutes.get(
   listSellerAdvertisementsController
 );
 
+advertisementRoutes.get("", listAllAdvertisementsController);
+
+advertisementRoutes.get("/:id", listAdvertisementByIdController);
+
 advertisementRoutes.patch(
   "/:id",
   ensureTokenIsValidMiddleware,
@@ -47,7 +52,7 @@ advertisementRoutes.delete(
   deleteAdvertisementController
 );
 
-advertisementRoutes.get("", listAllAdvertisementsController);
+
 advertisementRoutes.patch(
   "/status/:id",
   ensureTokenIsValidMiddleware,

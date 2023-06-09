@@ -6,6 +6,7 @@ import {
   advertisementResponseSchema,
   updateAdvertisementSchema,
   advertisementStatus,
+  advertisementByIdResponse,
 } from "../schemas/advertisement.schema";
 import { DeepPartial } from "typeorm";
 
@@ -17,6 +18,7 @@ type TAdvertisementArray = z.infer<typeof advertisementAllSchema>;
 type TAdvertisementUpdateRequest = DeepPartial<TAdvertisementReq>;
 type TupdateAdvertisement = z.infer<typeof updateAdvertisementSchema>;
 type TAdvertisementStatus = z.infer<typeof advertisementStatus>;
+type TadvertisementByIdResponse = z.infer<typeof advertisementByIdResponse>
 
 export {
   TAdvertisement,
@@ -27,4 +29,5 @@ export {
   TAdvertisementUpdateRequest,
   TupdateAdvertisement,
   TAdvertisementStatus,
+  TadvertisementByIdResponse
 };

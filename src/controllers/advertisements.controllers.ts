@@ -10,6 +10,7 @@ import {
 import { updateAdvertisementService } from "../services/advertisements/updateAdvertisement.service";
 import { listAllAdvertisementsService } from "../services/advertisements/listAllActiveAdvertisements.service";
 import { updateStatusAdvertisementService } from "../services/advertisements/updateStatusAdvertisement.service";
+import { listAdvertisementByIdService } from "../services/advertisements/listAdvertisementById.service";
 
 const createAdvertisementController = async (
   req: Request,
@@ -58,6 +59,14 @@ const listAllAdvertisementsController = async (req: Request, res: Response) => {
   return res.json(Advertisements);
 };
 
+const listAdvertisementByIdController = async (req: Request, res: Response) => {
+  const advertisementId: number = parseInt(req.params.id);
+
+  const advertisement = await listAdvertisementByIdService(advertisementId);
+
+  return res.json(advertisement);
+};
+
 const updateAdvertisementStatusController = async (
   req: Request,
   res: Response
@@ -80,5 +89,6 @@ export {
   updateAdvertisementController,
   deleteAdvertisementController,
   listAllAdvertisementsController,
+  listAdvertisementByIdController,
   updateAdvertisementStatusController,
 };
