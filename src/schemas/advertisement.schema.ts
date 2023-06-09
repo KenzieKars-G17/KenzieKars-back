@@ -11,6 +11,7 @@ const advertisementSchema = z.object({
   color: z.string().max(45),
   table_price: z.number(),
   price: z.number(),
+  is_active: z.boolean().optional().default(true),
   cover_image: z.string().max(45),
 });
 
@@ -25,26 +26,32 @@ const advertisementResponseSchema = z
     table_price: z.string(),
     price: z.string(),
     cover_image: z.string().max(45),
+    is_active: z.boolean().optional(),
   })
   .partial();
 
 const advertisementReqSchema = advertisementSchema.omit({ id: true });
 
-
-const updateAdvertisementSchema = advertisementSchema.omit({
-  id: true
-}).partial()
-
+const updateAdvertisementSchema = advertisementSchema
+  .omit({
+    id: true,
+  })
+  .partial();
 
 const advertisementAllSchema = advertisementResponseSchema
   .extend({ user: returnUserAdSchema })
   .partial()
   .array();
 
+const advertisementStatus = z.object({
+  is_active: z.boolean(),
+});
+
 export {
   advertisementSchema,
   advertisementReqSchema,
   advertisementAllSchema,
   advertisementResponseSchema,
-  updateAdvertisementSchema
+  updateAdvertisementSchema,
+  advertisementStatus,
 };

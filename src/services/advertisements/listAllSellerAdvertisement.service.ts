@@ -5,7 +5,7 @@ import { AppError } from "../../errors";
 import { TAdvertisementArray } from "../../interfaces/advertisement.interface";
 import { advertisementAllSchema } from "../../schemas/advertisement.schema";
 
-const listAdvertisementByIdService = async (
+const listSellerAdvertisementService = async (
   userId: number
 ): Promise<TAdvertisementArray> => {
   const advertisementRepository = AppDataSource.getRepository(Advertisement);
@@ -20,18 +20,17 @@ const listAdvertisementByIdService = async (
   }
 
   const advertisements: Advertisement[] = await advertisementRepository.find({
-     where: {
+    where: {
       user: {
-        id: user.id
+        id: user.id,
       },
-     }
-    ,
-    relations:{
-      user:true
-    }
+    },
+    relations: {
+      user: true,
+    },
   });
 
   return advertisementAllSchema.parse(advertisements);
 };
 
-export { listAdvertisementByIdService };
+export { listSellerAdvertisementService };
