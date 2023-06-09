@@ -32,6 +32,8 @@ const advertisementResponseSchema = z
 
 const advertisementReqSchema = advertisementSchema.omit({ id: true });
 
+const advertisementByIdResponse = advertisementResponseSchema.extend({ user: returnUserAdSchema })
+
 const updateAdvertisementSchema = advertisementSchema
   .omit({
     id: true,
@@ -54,4 +56,5 @@ export {
   advertisementResponseSchema,
   updateAdvertisementSchema,
   advertisementStatus,
+   advertisementByIdResponse
 };
