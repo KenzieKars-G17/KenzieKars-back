@@ -4,6 +4,7 @@ import { IUser, IUserUpdate } from "../interfaces/users.interfaces";
 import listAllUsersService from "../services/users/listUsers.service";
 import deleteUserService from "../services/users/deleteUser.service";
 import updateUserService from "../services/users/updateUser.service";
+import { listUserService } from "../services/users/getUser.service";
 
 const createUserController = async (
   req: Request,
@@ -21,6 +22,16 @@ const listAllUsersController = async (
   res: Response
 ): Promise<Response> => {
   const users = await listAllUsersService();
+
+  return res.json(users);
+};
+
+const listUsersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const userId = req.user.sub;
+  const users = await listUserService(userId);
 
   return res.json(users);
 };
@@ -51,4 +62,5 @@ export {
   listAllUsersController,
   deleteUserController,
   updateUserController,
+  listUsersController,
 };

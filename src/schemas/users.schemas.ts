@@ -23,6 +23,7 @@ const returnUserSchema = userSchema
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
   })
+  .partial()
   .omit({ password: true });
 
 const returnUserAdSchema = z

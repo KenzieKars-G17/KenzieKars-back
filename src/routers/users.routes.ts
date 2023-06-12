@@ -4,6 +4,7 @@ import {
   deleteUserController,
   listAllUsersController,
   updateUserController,
+  listUsersController,
 } from "../controllers/users.controllers";
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
 import ensureUserEmailExist from "../middlewares/ensureEmailExist.middleware";
@@ -23,12 +24,7 @@ usersRoutes.post(
   createUserController
 );
 
-usersRoutes.get(
-  "",
-  ensureTokenIsValidMiddleware,
-  ensureUserIsSeller,
-  listAllUsersController
-);
+usersRoutes.get("", ensureTokenIsValidMiddleware, listUsersController);
 
 usersRoutes.patch(
   "/:id",
