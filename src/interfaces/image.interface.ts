@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { imageSchema } from "../schemas/image.schema";
+import { imageSchema, imageSchemaReq } from "../schemas/image.schema";
 
 type Timage = z.infer<typeof imageSchema>;
-
-export { Timage };
+type TimageReq = z.infer<typeof imageSchemaReq>;
+export { Timage, TimageReq };

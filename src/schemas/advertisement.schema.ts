@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { returnUserAdSchema } from "./users.schemas";
+import { imageSchemaArray } from "./image.schema";
 
 const advertisementSchema = z.object({
   id: z.number(),
@@ -32,7 +33,10 @@ const advertisementResponseSchema = z
 
 const advertisementReqSchema = advertisementSchema.omit({ id: true });
 
-const advertisementByIdResponse = advertisementResponseSchema.extend({ user: returnUserAdSchema })
+const advertisementByIdResponse = advertisementResponseSchema.extend({
+  user: returnUserAdSchema,
+  images: imageSchemaArray,
+});
 
 const updateAdvertisementSchema = advertisementSchema
   .omit({
@@ -41,7 +45,7 @@ const updateAdvertisementSchema = advertisementSchema
   .partial();
 
 const advertisementAllSchema = advertisementResponseSchema
-  .extend({ user: returnUserAdSchema })
+  .extend({ user: returnUserAdSchema, images: imageSchemaArray || [] })
   .partial()
   .array();
 
@@ -56,5 +60,5 @@ export {
   advertisementResponseSchema,
   updateAdvertisementSchema,
   advertisementStatus,
-   advertisementByIdResponse
+  advertisementByIdResponse,
 };
