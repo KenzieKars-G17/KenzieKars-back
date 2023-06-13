@@ -13,6 +13,7 @@ const listAllAdvertisementsService = async (): Promise<TAdvertisementArray> => {
     },
     relations: {
       user: true,
+      images: true,
     },
   });
   return advertisementAllSchema.parse(advertisement);

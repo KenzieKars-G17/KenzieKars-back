@@ -16,6 +16,7 @@ const listAdvertisementByIdService = async (
       },
       relations: {
         user: true,
+        images: true,
       },
     });
 

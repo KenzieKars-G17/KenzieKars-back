@@ -14,6 +14,11 @@ import {
   updateAdvertisementStatusController,
   listAdvertisementByIdController,
 } from "../controllers/advertisements.controllers";
+import {
+  createImagesController,
+  deleteImageController,
+  listImagesController,
+} from "../controllers/images.controllers";
 import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 
 const advertisementRoutes = Router();
@@ -52,12 +57,31 @@ advertisementRoutes.delete(
   deleteAdvertisementController
 );
 
-
 advertisementRoutes.patch(
   "/status/:id",
   ensureTokenIsValidMiddleware,
   ensureUserIsSeller,
   updateAdvertisementStatusController
+);
+
+advertisementRoutes.post(
+  "/images",
+  ensureTokenIsValidMiddleware,
+  ensureUserIsSeller,
+  createImagesController
+);
+
+advertisementRoutes.delete(
+  "/:id/images",
+  ensureTokenIsValidMiddleware,
+  ensureUserIsSeller,
+  deleteImageController
+);
+
+advertisementRoutes.get(
+  "/:id/images",
+
+  listImagesController
 );
 
 export default advertisementRoutes;
