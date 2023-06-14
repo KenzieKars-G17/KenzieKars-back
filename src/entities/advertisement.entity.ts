@@ -27,6 +27,9 @@ class Advertisement {
   mileage: string;
 
   @Column({ type: "varchar", length: 45 })
+  description: string;
+
+  @Column({ type: "varchar", length: 45 })
   color: string;
 
   @Column({ type: "decimal", scale: 2 })
