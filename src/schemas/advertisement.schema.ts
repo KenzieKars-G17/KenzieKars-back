@@ -10,11 +10,12 @@ const advertisementSchema = z.object({
   fuel: z.string().max(125),
   mileage: z.string().max(45),
   color: z.string().max(45),
+  year: z.string().max(4),
   description: z.string().max(45),
   table_price: z.number(),
   price: z.number(),
   is_active: z.boolean().optional().default(true),
-  cover_image: z.string().max(45),
+  cover_image: z.string(),
 });
 
 const advertisementResponseSchema = z
@@ -29,7 +30,7 @@ const advertisementResponseSchema = z
     description: z.string().max(45),
     year: z.string().max(4),
     price: z.string(),
-    cover_image: z.string().max(45),
+    cover_image: z.string(),
     is_active: z.boolean().optional(),
   })
   .partial();
