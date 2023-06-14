@@ -29,6 +29,9 @@ class Advertisement {
   @Column({ type: "varchar", length: 45 })
   description: string;
 
+  @Column({ type: "varchar", length: 4 })
+  year: string;
+
   @Column({ type: "varchar", length: 45 })
   color: string;
 

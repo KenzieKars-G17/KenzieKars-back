@@ -27,6 +27,7 @@ const advertisementResponseSchema = z
     color: z.string().max(45),
     table_price: z.string(),
     description: z.string().max(45),
+    year: z.string().max(4),
     price: z.string(),
     cover_image: z.string().max(45),
     is_active: z.boolean().optional(),
