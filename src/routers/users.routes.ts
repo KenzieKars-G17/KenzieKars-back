@@ -2,9 +2,10 @@ import { Router } from "express";
 import {
   createUserController,
   deleteUserController,
-  listAllUsersController,
   updateUserController,
   listUsersController,
+  sendEmailResetPasswordController,
+  resetPasswordController,
 } from "../controllers/users.controllers";
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware";
 import ensureUserEmailExist from "../middlewares/ensureEmailExist.middleware";
@@ -13,7 +14,6 @@ import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
 import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsvalid.middleware";
 import ensureUserIsAdmin from "../middlewares/ensureIsSeller.middleware";
 import ensureIsAutorzedUser from "../middlewares/ensureIsAutorzedUser.middleware";
-import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 
 const usersRoutes: Router = Router();
 
@@ -24,7 +24,11 @@ usersRoutes.post(
   createUserController
 );
 
+usersRoutes.post("/resetPassword", sendEmailResetPasswordController);
+
 usersRoutes.get("", ensureTokenIsValidMiddleware, listUsersController);
+
+usersRoutes.patch("/resetPassword/:token", resetPasswordController);
 
 usersRoutes.patch(
   "/:id",

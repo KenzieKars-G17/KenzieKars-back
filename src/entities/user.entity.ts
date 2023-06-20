@@ -43,6 +43,9 @@ class User {
   @Column({ type: "varchar", length: 120 })
   password: string;
 
+  @Column({type:"varchar", length: 120, nullable: true})
+  resetToken: string | null;
+
   @CreateDateColumn({ type: "date" })
   createdAt: string;
 
