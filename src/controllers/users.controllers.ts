@@ -5,6 +5,8 @@ import listAllUsersService from "../services/users/listUsers.service";
 import deleteUserService from "../services/users/deleteUser.service";
 import updateUserService from "../services/users/updateUser.service";
 import { listUserService } from "../services/users/getUser.service";
+import sendEmailResetPasswordUserService from "../services/users/sendEmailResetPasswordUser.service";
+import resetPasswordUserService from "../services/users/resetPasswordUser.service";
 
 const createUserController = async (
   req: Request,
@@ -57,10 +59,32 @@ const updateUserController = async (
   return res.json(updatedUser);
 };
 
+const sendEmailResetPasswordController = async (
+  req: Request,
+  res: Response
+) => {
+  const { email } = req.body;
+
+  await sendEmailResetPasswordUserService(email);
+
+  return res.json({ message: "token enviado" });
+};
+
+const resetPasswordController = async (req: Request, res: Response) => {
+  const { password } = req.body;
+  const { token } = req.params;
+
+  await resetPasswordUserService(password, token);
+
+  return res.json({ message: "password changed with sucess!" });
+};
+
 export {
   createUserController,
   listAllUsersController,
   deleteUserController,
   updateUserController,
   listUsersController,
+  sendEmailResetPasswordController,
+  resetPasswordController,
 };
