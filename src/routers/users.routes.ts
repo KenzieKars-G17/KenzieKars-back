@@ -14,6 +14,7 @@ import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
 import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsvalid.middleware";
 import ensureUserIsAdmin from "../middlewares/ensureIsSeller.middleware";
 import ensureIsAutorzedUser from "../middlewares/ensureIsAutorzedUser.middleware";
+import { resetPasswordSchema } from "../schemas/resetPassword.schema";
 
 const usersRoutes: Router = Router();
 
@@ -28,7 +29,7 @@ usersRoutes.post("/resetPassword", sendEmailResetPasswordController);
 
 usersRoutes.get("", ensureTokenIsValidMiddleware, listUsersController);
 
-usersRoutes.patch("/resetPassword/:token", resetPasswordController);
+usersRoutes.patch("/resetPassword/:token",ensureDataIsValidMiddleware(resetPasswordSchema), resetPasswordController);
 
 usersRoutes.patch(
   "/:id",
