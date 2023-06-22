@@ -32,7 +32,7 @@ class EmailService {
   resetPasswordTemplate(
     userName: string,
     userEmail: string,
-    resetToken: string
+    token: string
   ) {
     const mailGenerator = new Mailgen({
       theme: "default",
@@ -46,17 +46,17 @@ class EmailService {
       body: {
         name: userName,
         intro:
-          "You have received this email because a password reset request for your account was received.",
+          "Você recebeu este e-mail porque uma solicitação de redefinição de senha para sua conta foi recebida.",
         action: {
-          instructions: "Click the button below to reset your password:",
+          instructions: "Clique no botão abaixo para redefinir sua senha:",
           button: {
             color: "#DC4D2F",
-            text: "Reset your password",
-            link: `http://localhost:5173/reset-password/${resetToken}`,
+            text: "Resete sua Senha",
+            link: `http://localhost:5173/reset-password/${token}`,
           },
         },
         outro:
-          "If you did not request a password reset, no further action is required on your part.",
+          "Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária de sua parte.",
       },
     };
 
@@ -64,7 +64,7 @@ class EmailService {
 
     const emailTemplate = {
       to: userEmail,
-      subject: "Reset password",
+      subject: "Resete sua senha",
       text: emailBody,
     };
 
