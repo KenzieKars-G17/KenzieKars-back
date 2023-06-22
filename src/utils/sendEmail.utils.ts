@@ -37,7 +37,7 @@ class EmailService {
     const mailGenerator = new Mailgen({
       theme: "default",
       product: {
-        name: "Reset de senha",
+        name: "Redefinir Senha",
         link: "http://localhost:3000/",
       },
     });
@@ -51,7 +51,7 @@ class EmailService {
           instructions: "Clique no botão abaixo para redefinir sua senha:",
           button: {
             color: "#DC4D2F",
-            text: "Resete sua Senha",
+            text: "Redefina sua Senha",
             link: `http://localhost:5173/reset-password/${token}`,
           },
         },
@@ -64,7 +64,7 @@ class EmailService {
 
     const emailTemplate = {
       to: userEmail,
-      subject: "Resete sua senha",
+      subject: "Redefina sua senha",
       text: emailBody,
     };
 
