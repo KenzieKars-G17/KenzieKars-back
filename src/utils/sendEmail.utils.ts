@@ -37,7 +37,7 @@ class EmailService {
     const mailGenerator = new Mailgen({
       theme: "default",
       product: {
-        name: "Redefinir Senha",
+        name: "Equipe Kenziekars",
         link: "http://localhost:3000/",
       },
     });
