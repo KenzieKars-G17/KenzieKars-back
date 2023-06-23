@@ -9,4 +9,6 @@ const addressSchema = z.object({
   complement: z.string().max(45).nullable().optional().default(null),
 });
 
-export { addressSchema };
+const addressSchemaUpdate = addressSchema.partial();
+
+export { addressSchema, addressSchemaUpdate };

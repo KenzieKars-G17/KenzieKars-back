@@ -3,6 +3,7 @@ import {
   createUserController,
   deleteUserController,
   updateUserController,
+  updateUserAddressController,
   listUsersController,
   sendEmailResetPasswordController,
   resetPasswordController,
@@ -11,6 +12,7 @@ import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middle
 import ensureUserEmailExist from "../middlewares/ensureEmailExist.middleware";
 import ensureUserIdExist from "../middlewares/ensureUserExists.middleware";
 import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
+import { addressSchemaUpdate } from "../schemas/address.schema";
 import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsvalid.middleware";
 import ensureUserIsAdmin from "../middlewares/ensureIsSeller.middleware";
 import ensureIsAutorzedUser from "../middlewares/ensureIsAutorzedUser.middleware";
@@ -29,7 +31,11 @@ usersRoutes.post("/resetPassword", sendEmailResetPasswordController);
 
 usersRoutes.get("", ensureTokenIsValidMiddleware, listUsersController);
 
-usersRoutes.patch("/resetPassword/:token",ensureDataIsValidMiddleware(resetPasswordSchema), resetPasswordController);
+usersRoutes.patch(
+  "/resetPassword/:token",
+  ensureDataIsValidMiddleware(resetPasswordSchema),
+  resetPasswordController
+);
 
 usersRoutes.patch(
   "/:id",
@@ -39,6 +45,16 @@ usersRoutes.patch(
   ensureDataIsValidMiddleware(userUpdateSchema),
   ensureUserEmailExist,
   updateUserController
+);
+
+usersRoutes.patch(
+  "/:id/address",
+  ensureTokenIsValidMiddleware,
+  ensureUserIdExist,
+  ensureIsAutorzedUser,
+  ensureDataIsValidMiddleware(addressSchemaUpdate),
+  ensureUserEmailExist,
+  updateUserAddressController
 );
 
 usersRoutes.delete(
