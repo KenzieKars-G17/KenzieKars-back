@@ -28,6 +28,7 @@ const returnUserSchema = userSchema
 
 const returnUserAdSchema = z
   .object({
+    id: z.number(),
     name: z.string().min(3).max(45),
   })
   .partial();
