@@ -18,6 +18,7 @@
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.0",
     "mailgen": "^2.0.27",
+    "moment": "^2.29.4",
     "nodemailer": "^6.9.3",
     "pg": "^8.10.0",
     "pg-format": "^1.0.4",
