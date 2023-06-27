@@ -29,7 +29,7 @@ usersRoutes.post(
 
 usersRoutes.post("/resetPassword", sendEmailResetPasswordController);
 
-usersRoutes.get("", ensureTokenIsValidMiddleware, listUsersController);
+usersRoutes.get("/:id", listUsersController);
 
 usersRoutes.patch(
   "/resetPassword/:token",
