@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import User from "./user.entity";
 import Image from "./image";
+import Comment from "./comments.entity";
 
 @Entity("advertisements")
 class Advertisement {
@@ -49,6 +50,9 @@ class Advertisement {
 
   @OneToMany(() => Image, (image) => image.advertisement)
   images: Image[];
+
+  @OneToMany(() => Comment, (comment) => comment.advertisement)
+  comments: Comment[];
 
   @ManyToOne(() => User)
   user: User;
