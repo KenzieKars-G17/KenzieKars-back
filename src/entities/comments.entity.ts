@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import moment from "moment";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+} from "typeorm";
 import Advertisement from "./advertisement.entity";
 import User from "./user.entity";
 
@@ -9,6 +16,9 @@ class Comment {
 
   @Column({ type: "text" })
   comment: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @ManyToOne(() => Advertisement)
   advertisement: Advertisement;

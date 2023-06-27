@@ -17,6 +17,7 @@ const commentSchemaArrays = z
   .object({
     id: z.number(),
     comment: z.string(),
+    createdAt: z.date(),
     user: returnUserAdSchema,
   })
   .array();

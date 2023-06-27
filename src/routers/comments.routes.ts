@@ -15,11 +15,7 @@ commentsRoute.post(
   createCommentsController
 );
 
-commentsRoute.get(
-  "/:id/comments",
-  ensureTokenIsValidMiddleware,
-  listCommentsController
-);
+commentsRoute.get("/:id/comments", listCommentsController);
 
 commentsRoute.delete(
   "/:id/comments/:id",
