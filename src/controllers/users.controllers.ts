@@ -21,20 +21,11 @@ const createUserController = async (
   return res.status(201).json(newUser);
 };
 
-const listAllUsersController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
-  const users = await listAllUsersService();
-
-  return res.json(users);
-};
-
 const listUsersController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const userId = req.user.sub;
+  const userId = Number(req.params.id);
   const users = await listUserService(userId);
 
   return res.json(users);
@@ -95,7 +86,6 @@ const resetPasswordController = async (req: Request, res: Response) => {
 
 export {
   createUserController,
-  listAllUsersController,
   deleteUserController,
   updateUserController,
   updateUserAddressController,

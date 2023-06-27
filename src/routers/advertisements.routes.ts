@@ -32,9 +32,7 @@ advertisementRoutes.post(
 );
 
 advertisementRoutes.get(
-  "/seller",
-  ensureTokenIsValidMiddleware,
-  ensureUserIsSeller,
+  "/seller/:id",
   listSellerAdvertisementsController
 );
 

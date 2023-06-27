@@ -26,7 +26,7 @@ const listSellerAdvertisementsController = async (
   req: Request,
   res: Response
 ) => {
-  const userId: number = req.user.sub;
+  const userId: number = Number(req.params.id);
 
   const Advertisements = await listSellerAdvertisementService(userId);
 
