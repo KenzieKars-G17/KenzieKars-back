@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   CreateDateColumn,
+  JoinColumn,
 } from "typeorm";
 import Advertisement from "./advertisement.entity";
 import User from "./user.entity";
@@ -20,7 +21,10 @@ class Comment {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => Advertisement)
+  @ManyToOne(() => Advertisement, (advertisement) => advertisement.comments, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "advertisement_id", referencedColumnName: "id" })
   advertisement: Advertisement;
 
   @ManyToOne(() => User)
