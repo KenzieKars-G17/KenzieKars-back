@@ -54,7 +54,10 @@ class Advertisement {
   @OneToMany(() => Comment, (comment) => comment.advertisement)
   comments: Comment[];
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.advertisements, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "user_id", referencedColumnName: "id" })
   user: User;
 }
 
