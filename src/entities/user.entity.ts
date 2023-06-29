@@ -34,7 +34,7 @@ class User {
   @Column({ type: "varchar", length: 45 })
   birthdate: string;
 
-  @Column({ type: "varchar", length: 45})
+  @Column({ type: "varchar" })
   description: string | null;
 
   @Column({ type: "boolean", default: false })
