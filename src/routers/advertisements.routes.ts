@@ -20,21 +20,20 @@ import {
   listImagesController,
 } from "../controllers/images.controllers";
 import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
+import upload from "../middlewares/multer.middleware";
 
 const advertisementRoutes = Router();
 
 advertisementRoutes.post(
   "",
+  upload.single("cover_image"),
   ensureTokenIsValidMiddleware,
   ensureUserIsSeller,
-  ensureDataIsValidMiddleware(advertisementReqSchema),
+  // ensureDataIsValidMiddleware(advertisementReqSchema),
   createAdvertisementController
 );
 
-advertisementRoutes.get(
-  "/seller/:id",
-  listSellerAdvertisementsController
-);
+advertisementRoutes.get("/seller/:id", listSellerAdvertisementsController);
 
 advertisementRoutes.get("", listAllAdvertisementsController);
 
@@ -42,9 +41,10 @@ advertisementRoutes.get("/:id", listAdvertisementByIdController);
 
 advertisementRoutes.patch(
   "/:id",
+  upload.single("cover_image"),
   ensureTokenIsValidMiddleware,
   ensureUserIsSeller,
-  ensureDataIsValidMiddleware(updateAdvertisementSchema),
+  // ensureDataIsValidMiddleware(updateAdvertisementSchema),
   updateAdvertisementController
 );
 
@@ -63,7 +63,8 @@ advertisementRoutes.patch(
 );
 
 advertisementRoutes.post(
-  "/images",
+  "/:id/images",
+  upload.single("image"),
   ensureTokenIsValidMiddleware,
   ensureUserIsSeller,
   createImagesController

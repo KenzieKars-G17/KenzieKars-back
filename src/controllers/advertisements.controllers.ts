@@ -11,15 +11,36 @@ import { updateAdvertisementService } from "../services/advertisements/updateAdv
 import { listAllAdvertisementsService } from "../services/advertisements/listAllActiveAdvertisements.service";
 import { updateStatusAdvertisementService } from "../services/advertisements/updateStatusAdvertisement.service";
 import { listAdvertisementByIdService } from "../services/advertisements/listAdvertisementById.service";
+import { v2 as cloudinary } from "cloudinary";
 
-const createAdvertisementController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+const createAdvertisementController = async (req: Request, res: Response) => {
   const userId: number = req.user.sub;
-  const newAdvertisement = await createAdvertisementService(req.body, userId);
 
-  return res.status(201).json(newAdvertisement);
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME!,
+    api_key: process.env.API_KEY!,
+    api_secret: process.env.API_SECRET!,
+  });
+
+  try {
+    const uploadImg = await cloudinary.uploader.upload(
+      req.file?.path!,
+      { resource_type: "image" },
+      (err, result) => {
+        if (result) {
+          req.body.cover_image = result.secure_url;
+          req.body.price = +req.body.price;
+          req.body.table_price = +req.body.table_price;
+        }
+      }
+    );
+
+    const newAdvertisement = await createAdvertisementService(req.body, userId);
+
+    return res.status(201).json(newAdvertisement);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const listSellerAdvertisementsController = async (
@@ -38,12 +59,39 @@ const updateAdvertisementController = async (req: Request, res: Response) => {
 
   const updateData: TAdvertisementUpdateRequest = req.body;
 
-  const updateAdvertisement = await updateAdvertisementService(
-    updateData,
-    advertisementId
-  );
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME!,
+    api_key: process.env.API_KEY!,
+    api_secret: process.env.API_SECRET!,
+  });
 
-  return res.json(updateAdvertisement);
+  try {
+    const uploadImg = await cloudinary.uploader.upload(
+      req.file?.path!,
+      { resource_type: "image" },
+      (err, result) => {
+        if (result) {
+          updateData.cover_image = result.secure_url;
+
+          if (updateData.price) {
+            updateData.price = +updateData.price;
+          }
+          if (updateData.table_price) {
+            updateData.table_price = +updateData.table_price;
+          }
+        }
+      }
+    );
+
+    const updateAdvertisement = await updateAdvertisementService(
+      updateData,
+      advertisementId
+    );
+
+    return res.status(201).json(updateAdvertisement);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const deleteAdvertisementController = async (req: Request, res: Response) => {
