@@ -27,7 +27,7 @@ class Address {
   @Column({ type: "varchar", length: 45 })
   number: string;
 
-  @Column({ type: "varchar", length: 45, nullable: true })
+  @Column({ type: "varchar", length: 90, nullable: true })
   complement: string | null;
 
   @OneToOne(() => User, (user) => user.address, {
