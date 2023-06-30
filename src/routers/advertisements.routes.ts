@@ -21,6 +21,7 @@ import {
 } from "../controllers/images.controllers";
 import ensureUserIsSeller from "../middlewares/ensureIsSeller.middleware";
 import upload from "../middlewares/multer.middleware";
+import pagination from "../middlewares/pagination.Middleware";
 
 const advertisementRoutes = Router();
 
@@ -33,9 +34,13 @@ advertisementRoutes.post(
   createAdvertisementController
 );
 
-advertisementRoutes.get("/seller/:id", listSellerAdvertisementsController);
+advertisementRoutes.get(
+  "/seller/:id",
+  pagination,
+  listSellerAdvertisementsController
+);
 
-advertisementRoutes.get("", listAllAdvertisementsController);
+advertisementRoutes.get("", pagination, listAllAdvertisementsController);
 
 advertisementRoutes.get("/:id", listAdvertisementByIdController);
 
