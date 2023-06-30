@@ -49,7 +49,10 @@ const listSellerAdvertisementsController = async (
 ) => {
   const userId: number = Number(req.params.id);
 
-  const Advertisements = await listSellerAdvertisementService(userId);
+  const Advertisements = await listSellerAdvertisementService(
+    userId,
+    res.locals.pagination
+  );
 
   return res.json(Advertisements);
 };
@@ -102,7 +105,9 @@ const deleteAdvertisementController = async (req: Request, res: Response) => {
 };
 
 const listAllAdvertisementsController = async (req: Request, res: Response) => {
-  const Advertisements = await listAllAdvertisementsService();
+  const Advertisements = await listAllAdvertisementsService(
+    res.locals.pagination
+  );
 
   return res.json(Advertisements);
 };
