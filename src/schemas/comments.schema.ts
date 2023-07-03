@@ -5,6 +5,9 @@ import { advertisementResponseSchema } from "./advertisement.schema";
 const createCommentSchema = z.object({
   comment: z.string(),
 });
+const updateCommentSchema = z.object({
+  comment: z.string().optional(),
+});
 
 const createCommentResponseSchema = z.object({
   id: z.number(),
@@ -26,4 +29,5 @@ export {
   createCommentSchema,
   createCommentResponseSchema,
   commentSchemaArrays,
+  updateCommentSchema,
 };
