@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --rs --cls src/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@types/multer": "^1.4.7",
