@@ -6,7 +6,9 @@ const addressSchema = z.object({
   state: z.string().max(2),
   street: z.string().max(45),
   number: z.string().max(45),
-  complement: z.string().max(45).nullable().optional().default(null),
+  complement: z.string().max(90).nullable().optional().default(null),
 });
 
-export { addressSchema };
+const addressSchemaUpdate = addressSchema.partial();
+
+export { addressSchema, addressSchemaUpdate };

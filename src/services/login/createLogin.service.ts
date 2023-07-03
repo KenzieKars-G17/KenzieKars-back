@@ -30,7 +30,7 @@ const createLoginService = async (loginData: ILogin): Promise<string> => {
 
   const token: string = jwt.sign(
     {
-      admin: user.seller,
+      seller: user.seller,
     },
     process.env.SECRET_KEY!,
     {

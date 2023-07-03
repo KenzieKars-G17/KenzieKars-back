@@ -34,7 +34,7 @@ class User {
   @Column({ type: "varchar", length: 45 })
   birthdate: string;
 
-  @Column({ type: "varchar", length: 45, nullable: true })
+  @Column({ type: "varchar" })
   description: string | null;
 
   @Column({ type: "boolean", default: false })
@@ -42,6 +42,9 @@ class User {
 
   @Column({ type: "varchar", length: 120 })
   password: string;
+
+  @Column({type:"varchar", length: 120, nullable: true})
+  resetToken: string | null;
 
   @CreateDateColumn({ type: "date" })
   createdAt: string;

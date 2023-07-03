@@ -27,11 +27,13 @@ class Address {
   @Column({ type: "varchar", length: 45 })
   number: string;
 
-  @Column({ type: "varchar", length: 45, nullable: true })
+  @Column({ type: "varchar", length: 90, nullable: true })
   complement: string | null;
 
-  @OneToOne(() => User, (user) => user.address)
-  @JoinColumn()
+  @OneToOne(() => User, (user) => user.address, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "user_id", referencedColumnName: "id" })
   user: User;
 }
 
