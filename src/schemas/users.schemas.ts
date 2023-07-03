@@ -6,7 +6,7 @@ const userSchema = z
     name: z.string().min(3).max(45),
     email: z.string().email().max(45),
     cpf: z.string().max(11),
-    phone: z.string().max(9),
+    phone: z.string().max(25),
     birthdate: z.string().max(10),
     description: z.string(),
     seller: z.boolean().optional().default(false),
@@ -40,7 +40,7 @@ const userUpdateSchema = z
     name: z.string().min(3).max(45).optional(),
     email: z.string().email().max(45).optional(),
     password: z.string().min(4).max(120).optional(),
-    phone: z.string().max(9).optional(),
+    phone: z.string().max(25).optional(),
     birthdate: z.string().max(10).optional(),
     description: z.string().optional(),
   })
