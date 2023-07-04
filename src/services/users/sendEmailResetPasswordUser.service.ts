@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../errors";
-import { randomUUID } from "node:crypto";
+import { randomUUID } from "crypto";
 import { emailService } from "../../utils/sendEmail.utils";
 
 const sendEmailResetPasswordUserService = async (userEmail: string) => {
