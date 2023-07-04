@@ -30,7 +30,10 @@ const DataSourceConfig = (): DataSourceOptions => {
         synchronize: false,
         logging: true,
         migrations: [migrationsPath],
-        entities: [entitiesPath]
+        entities: [entitiesPath],
+        ssl: {
+          rejectUnauthorized: false,
+        },
     }
 }
 
