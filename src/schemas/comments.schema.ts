@@ -5,7 +5,6 @@ import { advertisementResponseSchema } from "./advertisement.schema";
 const createCommentSchema = z.object({
   comment: z.string(),
 });
-
 const updateCommentSchema = z.object({
   comment: z.string().optional(),
 });
