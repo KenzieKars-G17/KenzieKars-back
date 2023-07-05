@@ -29,7 +29,7 @@ const updateAdvertisementService = async (
 
   await AdvertisementRepository.save(newAdvertisementData);
 
-  return updateAdvertisementSchema.parse(newAdvertisementData);
+  return newAdvertisementData;
 };
 
 export { updateAdvertisementService };
