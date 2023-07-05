@@ -5,9 +5,11 @@ import deleteImageService from "../services/images/deleteImage.service";
 import { listAdvertisementImagesService } from "../services/images/listAllAdImages.service";
 import { v2 as cloudinary } from "cloudinary";
 
-const createImagesController = async (req: Request, res: Response) => {
-  const advertisementId = req.params.id;
-  if (!advertisementId) {
+const createImagesController = async (req: Request, res: Response) => {  
+  
+  const advertisementId = parseInt(req.params.id);
+
+    if (!advertisementId) {
     throw new AppError("Advertisement does not exists", 404);
   }
 
