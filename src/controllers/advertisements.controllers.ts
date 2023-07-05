@@ -145,22 +145,24 @@ const updateAdvertisementController = async (req: Request, res: Response) => {
   });
 
   try {
-    const uploadImg = await cloudinary.uploader.upload(
-      req.file?.path!,
-      { resource_type: "image" },
-      (err, result) => {
-        if (result) {
-          updateData.cover_image = result.secure_url;
+    if (req.file) {
+      const uploadImg = await cloudinary.uploader.upload(
+        req.file?.path!,
+        { resource_type: "image" },
+        (err, result) => {
+          if (result) {
+            updateData.cover_image = result.secure_url;
 
-          if (updateData.price) {
-            updateData.price = +updateData.price;
-          }
-          if (updateData.table_price) {
-            updateData.table_price = +updateData.table_price;
+            if (updateData.price) {
+              updateData.price = +updateData.price;
+            }
+            if (updateData.table_price) {
+              updateData.table_price = +updateData.table_price;
+            }
           }
         }
-      }
-    );
+      );
+    }
 
     const updateAdvertisement = await updateAdvertisementService(
       updateData,
