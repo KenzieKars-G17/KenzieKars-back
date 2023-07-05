@@ -13,20 +13,30 @@ import { updateStatusAdvertisementService } from "../services/advertisements/upd
 import { listAdvertisementByIdService } from "../services/advertisements/listAdvertisementById.service";
 import { v2 as cloudinary } from "cloudinary";
 
-const createAdvertisementController = async (req: Request, res: Response) => {
+const createAdvertisementController = async (req: Request, res: Response) => {  
+
   const userId: number = req.user.sub;
 
-  cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME!,
-    api_key: process.env.API_KEY!,
-    api_secret: process.env.API_SECRET!,
-  });
+  cloudinary.config({    cloud_name: process.env.CLOUD_NAME!,    api_key: process.env.API_KEY!,    api_secret: process.env.API_SECRET!,  });
+
+  let uploadedFiles = Object.values(req.files!);
+  const cover_image_path = uploadedFiles[0]? uploadedFiles[0][0].path : null
+  const gallery_image_1_path = uploadedFiles[1]? uploadedFiles[1][0].path : null
+  const gallery_image_2_path = uploadedFiles[2]? uploadedFiles[2][0].path : null
+  const gallery_image_3_path = uploadedFiles[3]? uploadedFiles[3][0].path : null
+  const gallery_image_4_path = uploadedFiles[4]? uploadedFiles[4][0].path : null
+
+  const galleryImages = [
+    {image: ""},
+    {image: ""},
+    {image: ""},
+    {image: ""},
+  ]
 
   try {
-    const uploadImg = await cloudinary.uploader.upload(
-      req.file?.path!,
-      { resource_type: "image" },
-      (err, result) => {
+
+    const uploadCoverImage = await cloudinary.uploader.upload(cover_image_path, { resource_type: "image" }, (err, result) => {
+
         if (result) {
           req.body.cover_image = result.secure_url;
           req.body.price = +req.body.price;
@@ -35,7 +45,41 @@ const createAdvertisementController = async (req: Request, res: Response) => {
       }
     );
 
-    const newAdvertisement = await createAdvertisementService(req.body, userId);
+    const uploadGalleryImage1 = await cloudinary.uploader.upload(gallery_image_1_path, { resource_type: "image" }, (err, result) => {
+
+        if (result) {
+          galleryImages[0].image = result.secure_url;
+        }
+      }
+    );
+
+    const uploadGalleryImage2 = await cloudinary.uploader.upload(gallery_image_2_path, { resource_type: "image" }, (err, result) => {
+
+        if (result) {
+          galleryImages[1].image = result.secure_url;
+        }
+      }
+    );
+
+    const uploadGalleryImage3 = await cloudinary.uploader.upload(gallery_image_3_path, { resource_type: "image" }, (err, result) => {
+
+        if (result) {
+          galleryImages[2].image = result.secure_url;
+        }
+      }
+    );
+
+    const uploadGalleryImage4 = await cloudinary.uploader.upload(gallery_image_3_path, { resource_type: "image" }, (err, result) => {
+
+        if (result) {
+          galleryImages[3].image = result.secure_url;
+        }
+      }
+    );
+
+
+
+    const newAdvertisement = await createAdvertisementService(req.body, userId, galleryImages);
 
     return res.status(201).json(newAdvertisement);
   } catch (error) {

@@ -27,7 +27,13 @@ const advertisementRoutes = Router();
 
 advertisementRoutes.post(
   "",
-  upload.single("cover_image"),
+  upload.fields([
+    { name: "cover_image", maxCount: 1 },
+    { name: "gallery_image_1", maxCount: 1 },
+    { name: "gallery_image_2", maxCount: 1 },
+    { name: "gallery_image_3", maxCount: 1 },
+    { name: "gallery_image_4", maxCount: 1 }
+  ]),
   ensureTokenIsValidMiddleware,
   ensureUserIsSeller,
   // ensureDataIsValidMiddleware(advertisementReqSchema),
