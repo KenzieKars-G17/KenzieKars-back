@@ -29,16 +29,12 @@ class EmailService {
       });
   }
 
-  resetPasswordTemplate(
-    userName: string,
-    userEmail: string,
-    token: string
-  ) {
+  resetPasswordTemplate(userName: string, userEmail: string, token: string) {
     const mailGenerator = new Mailgen({
       theme: "default",
       product: {
         name: "Equipe KenzieKars",
-        link: "http://localhost:3000/",
+        link: "https://kenzie-kars-front.vercel.app/",
       },
     });
 
@@ -52,7 +48,7 @@ class EmailService {
           button: {
             color: "#DC4D2F",
             text: "Redefina sua Senha",
-            link: `http://localhost:5173/reset-password/${token}`,
+            link: `https://kenzie-kars-front.vercel.app//reset-password/${token}`,
           },
         },
         outro:
